@@ -18,5 +18,10 @@ namespace MakaleEntities
         public string Aciklama { get; set; }
 
         public virtual List<Makale> Makaleler { get; set; }
+
+        public Kategori()
+        {
+            Makaleler=new List<Makale>();
+        }
     }
 }
