@@ -122,7 +122,7 @@ namespace MakaleDAL
             }//for kategori
 
             context.SaveChanges();
-
+      
         }
     }
 }
