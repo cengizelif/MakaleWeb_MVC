@@ -15,5 +15,11 @@ namespace MakaleBLL
         {
             return rep_kat.Liste();
         }
+
+        public Kategori KategoriBul(int id)
+        {
+            return rep_kat.Find(x=>x.Id == id); 
+        }
+
     }
 }

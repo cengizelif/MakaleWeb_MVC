@@ -138,6 +138,7 @@
     <Content Include="Scripts\jquery-3.6.4.min.map" />
     <Content Include="Views\Shared\_PartialPageKategoriler.cshtml" />
     <Content Include="Views\Shared\_PartialPagekat2.cshtml" />
+    <Content Include="Views\Home\Hakkımızda.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
