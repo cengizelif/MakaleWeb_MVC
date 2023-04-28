@@ -50,19 +50,23 @@
             <div class="row">
                 @{
                     Random r = new Random();
-                    int x = r.Next(200, 240);
-                    string link = "https://picsum.photos/id/" + x + "/200/300";}
+                    int x = r.Next(200,240);
+                    string link = "https://picsum.photos/id/" + x + "/200/300";
+                    }
 
                 <br />
 
                 @foreach (var item in Model)
                 {
-                    x = r.Next(200, 240);
+                    x = r.Next(200,240);
                     link = "https://picsum.photos/id/" + x + "/200/300";
+                    //link = "/resim/"+item.Id.ToString()+ ".jpg";
 
-                    <div class="col-sm-4 col-lg-4 col-md-4">
+
+                        <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img src=@link alt="">
+                            <img src="@link" alt="">
+                          
                             <div class="caption">
 
                                 <h4>
@@ -77,10 +81,7 @@
                                 @if (!string.IsNullOrEmpty(item.Icerik) && item.Icerik.Length > 70)
                                 {
                                     <p>@item.Icerik.Substring(0, 70)</p><p class="pull-right"> <a href="#" class="btn btn-default btn-xs">devamı<span class="glyphicon glyphicon-chevron-right"></span></a></p>
-                                                                   ,
-
-
-                                                                    }
+                                 }
                                                     else
                                                     {
                                                         <p>@item.Icerik</p>

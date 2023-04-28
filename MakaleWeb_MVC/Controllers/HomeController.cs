@@ -1,5 +1,6 @@
 ﻿using MakaleBLL;
 using MakaleEntities;
+using MakaleEntities.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,52 @@ namespace MakaleWeb_MVC.Controllers
         public ActionResult Hakkımızda()
         {
             return View();
+        }
+
+        public ActionResult Giris()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Giris(LoginModel model)
+        {
+            return View();
+        }
+
+        public ActionResult KayitOl()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult KayitOl(RegisterModel model)
+        {
+            KullaniciYonet ky = new KullaniciYonet();
+                      
+            //Kayıt işlemi yapılacak
+            //Aktivasyon maili gönderilecek
+
+            if(ModelState.IsValid)
+            {
+              MakaleBLLSonuc<Kullanici> sonuc=ky.KullaniciBul(model);
+
+                if(sonuc.hatalar.Count>0)
+                {
+                    //ModelState.AddModelError("", "Bu kullanıcı adı yada email kayıtlı");
+                    sonuc.hatalar.ForEach(x => ModelState.AddModelError("", x));
+                    return View(model);  
+                }
+                else
+                {
+                    //database kaydet
+                    return RedirectToAction("Giris");
+                }
+
+               
+                //Kullanıcı adı ve email varmı kontrolu
+            }
+            return View(model);
         }
 
 
