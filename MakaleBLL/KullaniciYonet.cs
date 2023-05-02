@@ -12,7 +12,33 @@ namespace MakaleBLL
 {
     public class KullaniciYonet
     {
-        Repository<Kullanici> rep_kul=new Repository<Kullanici>();  
+        Repository<Kullanici> rep_kul=new Repository<Kullanici>();
+
+        public MakaleBLLSonuc<Kullanici> ActivateUser(Guid id)
+        {
+            MakaleBLLSonuc<Kullanici> sonuc = new MakaleBLLSonuc<Kullanici>();
+            sonuc.nesne= rep_kul.Find(x => x.AktifGuid == id);
+
+            if(sonuc.nesne!=null)
+            {
+                if(sonuc.nesne.Aktif)
+                {
+                    sonuc.hatalar.Add("Kullanıcı zaten daha önce aktif edilmiştir.");
+                }
+                else
+                {
+                    sonuc.nesne.Aktif = true;
+                    rep_kul.Update(sonuc.nesne);
+                }
+            }
+            else
+            {
+                sonuc.hatalar.Add("Aktifleştirilecek kullanıcı bulunamadı");
+            }
+
+            return sonuc;
+        }
+
         public MakaleBLLSonuc<Kullanici> KullaniciKaydet(RegisterModel model)
         {
             MakaleBLLSonuc<Kullanici> sonuc = new MakaleBLLSonuc<Kullanici>();

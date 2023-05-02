@@ -114,6 +114,23 @@ namespace MakaleWeb_MVC.Controllers
             return View();
         }
 
+        public ActionResult HesapAktiflestir(Guid id)
+        {
+            MakaleBLLSonuc<Kullanici> sonuc=kuly.ActivateUser(id);
+            if(sonuc.hatalar.Count>0)
+            {
+                TempData["hatalar"] = sonuc.hatalar;
+                return RedirectToAction("ActivateError");
+            }
+          
+            return View();  
+        }
+
+        public ActionResult Cikis()
+        {
+            Session["login"] = null;
+            return RedirectToAction("Index");  
+        }
 
         //public PartialViewResult kategoriPartial()
         //{

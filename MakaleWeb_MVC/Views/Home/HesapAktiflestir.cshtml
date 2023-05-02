@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "KayitBasarili";
+    ViewBag.Title = "Hesap Aktiflestirildi";
 }
 
 <link href="~/Content/login.css" rel="stylesheet" />
@@ -9,14 +9,13 @@
     <div class="container">
         <div class="row main">
             <div class="form-header">
-                <h1 class="text-center ">Yönlendiriliyorsunuz... </h1>
+                <h1 class="text-center">Yönlendiriliyorsunuz... </h1>
             </div>
             <div class="main-content">
                 <div class="text-success">
-                    <h2>Kayıt Başarılı</h2>
-                    <p class="text-justify">
-                        Lütfen e-posta adresine gönderilen aktivasyon linkine tıklayarak hesabınızı aktifleştiriniz.
-                        Hesabınızı aktifleştirmeden makale ve yorum yazamazsınız ve beğeni yapamazsınız.
+                    <h2>Hesap Aktifleştirildi</h2>
+                    <p class="text-justify">                      
+                        Hesabınız aktifleştirildi.Artık makale ve yorum yazabilirsiniz ve beğeni yapabilirsiniz.
                     </p>
                 </div>
 
@@ -33,7 +32,9 @@
     });
 
     setTimeout(function () {
-        window.location="/Home/Index"
-    },5000);
+        window.location = "/Home/Index"
+    }, 5000);
 
 </script>
+
+
