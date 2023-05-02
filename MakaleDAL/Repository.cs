@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MakaleEntities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -27,6 +28,17 @@ namespace MakaleDAL
         public int Insert(T nesne)
         {
             dbset.Add(nesne);
+
+            if(nesne is BaseClass)
+            {
+               BaseClass obj =nesne as BaseClass;
+               DateTime tarih=DateTime.Now;
+
+                obj.KayitTarihi = tarih;
+                obj.DegistirmeTarihi = tarih;
+                obj.DegistirenKullanici = "system";
+            }
+
             return db.SaveChanges();
         }
         public int Delete(T nesne)
@@ -36,6 +48,13 @@ namespace MakaleDAL
         }
         public int Update(T nesne)
         {
+            if (nesne is BaseClass)
+            {
+                BaseClass obj = nesne as BaseClass;
+ 
+                obj.DegistirmeTarihi = DateTime.Now;
+                obj.DegistirenKullanici = "system";
+            }
             return db.SaveChanges();
         }
         public T Find(Expression<Func<T, bool>> kosul)

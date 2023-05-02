@@ -20,6 +20,16 @@
 
 <body>
 
+    @{
+        Kullanici kul = null;
+
+        if(Session["login"]!=null)
+        {
+            kul = Session["login"] as Kullanici;
+        }
+
+    }
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -53,10 +63,17 @@
                     </li>*@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+
+                    @if(kul==null)
+                    {
                     <li><a href="/Home/Giris"><span class="glyphicon glyphicon-log-in"></span> Giriş</a></li>
                     <li><a href="/Home/KayitOl"><span class="glyphicon glyphicon-user"></span> Kayıt Ol</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> elifcengiz</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Çıkış</a></li>
+                    }
+                    else
+                    {
+                    <li><a href="/Home/Profil"><span class="glyphicon glyphicon-user"></span> @kul.KullaniciAdi</a></li>
+                    <li><a href="/Home/Cikis"><span class="glyphicon glyphicon-log-out"></span> Çıkış</a></li>
+                    }
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

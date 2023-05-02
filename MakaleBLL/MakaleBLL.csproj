@@ -59,6 +59,10 @@
     <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MakaleCommon\MakaleCommon.csproj">
+      <Project>{5055bcf2-bf15-4704-bd84-df963ae4d830}</Project>
+      <Name>MakaleCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MakaleDAL\MakaleDAL.csproj">
       <Project>{3831f6b7-b8bc-48f0-80ed-b1570ffee606}</Project>
       <Name>MakaleDAL</Name>

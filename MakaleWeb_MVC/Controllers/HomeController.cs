@@ -13,6 +13,7 @@ namespace MakaleWeb_MVC.Controllers
     {
         MakaleYonet my = new MakaleYonet();
         KategoriYonet ky = new KategoriYonet();
+        KullaniciYonet kuly = new KullaniciYonet();
         public ActionResult Index()
         {
             // Test test = new Test();
@@ -51,6 +52,7 @@ namespace MakaleWeb_MVC.Controllers
             return View();
         }
 
+      
         public ActionResult Giris()
         {
             return View();
@@ -59,7 +61,22 @@ namespace MakaleWeb_MVC.Controllers
         [HttpPost]
         public ActionResult Giris(LoginModel model)
         {
-            return View();
+            if(ModelState.IsValid)
+            {
+              MakaleBLLSonuc<Kullanici> sonuc=kuly.LoginKontrol(model);
+
+                if(sonuc.hatalar.Count>0)
+                {
+                    sonuc.hatalar.ForEach(x => ModelState.AddModelError("", x));
+                    return View(model);  
+                }
+
+                Session["login"] = sonuc.nesne;
+                return RedirectToAction("Index");
+
+            }         
+
+            return View(model);
         }
 
         public ActionResult KayitOl()
@@ -69,15 +86,11 @@ namespace MakaleWeb_MVC.Controllers
 
         [HttpPost]
         public ActionResult KayitOl(RegisterModel model)
-        {
-            KullaniciYonet ky = new KullaniciYonet();
-                      
-            //Kayıt işlemi yapılacak
-            //Aktivasyon maili gönderilecek
+        {         
 
             if(ModelState.IsValid)
             {
-              MakaleBLLSonuc<Kullanici> sonuc=ky.KullaniciBul(model);
+              MakaleBLLSonuc<Kullanici> sonuc=kuly.KullaniciKaydet(model);
 
                 if(sonuc.hatalar.Count>0)
                 {
@@ -87,17 +100,19 @@ namespace MakaleWeb_MVC.Controllers
                 }
                 else
                 {
-                    //database kaydet
-                    return RedirectToAction("Giris");
-                }
 
+                    return RedirectToAction("KayitBasarili");
+                }
                
-                //Kullanıcı adı ve email varmı kontrolu
+          
             }
             return View(model);
         }
 
-
+        public ActionResult KayitBasarili()
+        {
+            return View();
+        }
 
 
         //public PartialViewResult kategoriPartial()
