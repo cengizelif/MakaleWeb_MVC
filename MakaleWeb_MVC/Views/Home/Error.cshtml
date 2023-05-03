@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Hesap Aktiflestirildi";
+    ViewBag.Title = "Geçersiz İşlem";
 }
 
 <link href="~/Content/login.css" rel="stylesheet" />
@@ -10,12 +10,17 @@
         <div class="row main">
             <div class="form-header">
                 <h1 class="text-center">Yönlendiriliyorsunuz... </h1>
-            </div>
+            </div>   
             <div class="main-content">
-                <div class="text-success">
-                    <h2><span class="glyphicon glyphicon-ok-circle"></span>Hesap Aktifleştirildi</h2>
-                    <p class="text-justify">                      
-                        Hesabınız aktifleştirildi.Artık makale ve yorum yazabilirsiniz ve beğeni yapabilirsiniz.
+                <div class="text-danger">
+                    <h2><span class="glyphicon glyphicon-remove"></span>Geçersiz işlem</h2>
+                    <br />
+                    <p class="text-justify">
+                        @foreach (string item in (List<string>)ViewBag.hatalar)
+                        {
+                            @item
+                             <br/>
+                        }
                     </p>
                 </div>
 

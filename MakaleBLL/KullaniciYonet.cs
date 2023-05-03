@@ -39,6 +39,19 @@ namespace MakaleBLL
             return sonuc;
         }
 
+        public MakaleBLLSonuc<Kullanici> KullaniciBul(int id)
+        {
+            MakaleBLLSonuc<Kullanici> sonuc = new MakaleBLLSonuc<Kullanici>();
+            sonuc.nesne = rep_kul.Find(x => x.Id == id);
+
+            if(sonuc.nesne==null)
+            {
+                sonuc.hatalar.Add("Kullanıcı bulunamadı");
+            }
+
+            return sonuc;
+        }
+
         public MakaleBLLSonuc<Kullanici> KullaniciKaydet(RegisterModel model)
         {
             MakaleBLLSonuc<Kullanici> sonuc = new MakaleBLLSonuc<Kullanici>();

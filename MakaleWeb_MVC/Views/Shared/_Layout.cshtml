@@ -46,9 +46,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#"><span class="glyphicon glyphicon-wrench"></span> Yönetim</a>
-                    </li>
+                    @if (kul!= null)
+                    {
+                        <li>
+                            <a href="#"><span class="glyphicon glyphicon-wrench"></span> Yönetim</a>
+                        </li>
+                    }
+
                     <li>
                         <a href="/Home/EnBegenilenler"><span class="glyphicon glyphicon-heart"></span> En Beğenilenler</a>
                     </li>
@@ -59,8 +63,8 @@
                         <a href="/Home/Hakkımızda"><span class="glyphicon glyphicon-info-sign"></span> Hakkımızda</a>
                     </li>
                     @*<li>
-                        <a href="#"><span class="glyphicon glyphicon-phone"></span> İletişim</a>
-                    </li>*@
+            <a href="#"><span class="glyphicon glyphicon-phone"></span> İletişim</a>
+        </li>*@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
 
@@ -94,9 +98,9 @@
                 <div class="col-lg-4 text-center">
                     <h5><b>Site Haritası</b></h5>
                     <hr />
-                    <a href="#"><span class="glyphicon glyphicon-heart"></span>   En Beğenilenler</a>
+                    <a href="/Home/EnBegenilenler"><span class="glyphicon glyphicon-heart"></span>En Beğenilenler</a>
                     <br />
-                    <a href="#"><span class="glyphicon glyphicon-list"></span> Son Yazılanlar</a>
+                    <a href="/Home/SonYazilanlar"><span class="glyphicon glyphicon-list"></span> Son Yazılanlar</a>
                 </div>
 
                 <div class="col-lg-4 text-center">

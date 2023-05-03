@@ -25,6 +25,10 @@ namespace MakaleEntities
 
         [Required, StringLength(20)]
         public string Sifre { get; set; }
+
+        [StringLength(30)]
+        public string ProfilResimDosyaAdi { get; set; }
+
         public bool Aktif { get; set; }
 
         [Required]

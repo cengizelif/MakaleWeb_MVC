@@ -24,7 +24,8 @@ namespace MakaleDAL
                  AktifGuid=Guid.NewGuid(),
                   KayitTarihi=DateTime.Now,
                   DegistirmeTarihi=DateTime.Now.AddMinutes(5),
-                   DegistirenKullanici="elif"
+                   DegistirenKullanici="elif",
+                   ProfilResimDosyaAdi= "user_1.jpg"
             };
 
             context.Kullanicilar.Add(admin);
@@ -42,7 +43,8 @@ namespace MakaleDAL
                KullaniciAdi=$"user{i}",
                 Sifre="123",
                 KayitTarihi=DateTime.Now.AddDays(-1),
-                 DegistirmeTarihi=DateTime.Now, DegistirenKullanici= $"user{i}"
+                 DegistirmeTarihi=DateTime.Now, DegistirenKullanici= $"user{i}",
+                    ProfilResimDosyaAdi = "user_1.jpg"
                 };
 
                 context.Kullanicilar.Add(k);

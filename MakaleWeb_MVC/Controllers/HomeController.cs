@@ -120,7 +120,7 @@ namespace MakaleWeb_MVC.Controllers
             if(sonuc.hatalar.Count>0)
             {
                 TempData["hatalar"] = sonuc.hatalar;
-                return RedirectToAction("ActivateError");
+                return RedirectToAction("Error");
             }
           
             return View();  
@@ -128,8 +128,38 @@ namespace MakaleWeb_MVC.Controllers
 
         public ActionResult Cikis()
         {
-            Session["login"] = null;
+            Session.Clear();    
             return RedirectToAction("Index");  
+        }
+
+        public ActionResult Error()
+        {
+            List<string> errors = new List<string>();
+            
+            if(TempData["hatalar"]!=null)
+            {
+                ViewBag.hatalar = TempData["hatalar"];
+            }
+            else
+            { ViewBag.hatalar = errors; }
+           
+            return View(); 
+        }  
+
+        public ActionResult Profil() 
+        {
+            Kullanici kullanici=Session["login"] as Kullanici;
+
+            MakaleBLLSonuc<Kullanici> sonuc = kuly.KullaniciBul(kullanici.Id);
+
+            if(sonuc.hatalar.Count>0)
+            {
+                TempData["hatalar"] = sonuc.hatalar;
+                return RedirectToAction("Error");
+            }
+
+            return View(sonuc.nesne);
+        
         }
 
         //public PartialViewResult kategoriPartial()
