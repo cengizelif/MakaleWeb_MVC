@@ -180,6 +180,27 @@ namespace MakaleWeb_MVC.Controllers
         [HttpPost]
         public ActionResult ProfilDegistir(Kullanici model,HttpPostedFileBase profilresim)
         {
+            ModelState.Remove("DegistirenKullanici");
+
+            if(ModelState.IsValid) 
+            {
+                if (profilresim != null && (profilresim.ContentType == "image/jpg" || profilresim.ContentType == "image/jpeg" || profilresim.ContentType == "image/png"))
+                {
+                    string dosya = $"user_{model.Id}.{profilresim.ContentType.Split('/')[1]}";
+
+                    profilresim.SaveAs(Server.MapPath($"~/resim/{dosya}"));
+
+                    model.ProfilResimDosyaAdi = dosya;
+                }
+
+              MakaleBLLSonuc<Kullanici> sonuc=  kuly.KullaniciUpdate(model);
+                if (sonuc.hatalar.Count > 0)
+                {
+                    sonuc.hatalar.ForEach(x => ModelState.AddModelError("", x));
+                    return View(model);
+                }
+
+            }
             return View(model);
         }
 

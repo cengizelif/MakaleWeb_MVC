@@ -4,7 +4,10 @@ using MakaleEntities;
 using MakaleEntities.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -97,6 +100,46 @@ namespace MakaleBLL
             }
 
             return sonuc;   
+        }
+
+        public MakaleBLLSonuc<Kullanici> KullaniciUpdate(Kullanici model)
+        {
+            MakaleBLLSonuc<Kullanici> sonuc = new MakaleBLLSonuc<Kullanici>();
+
+          Kullanici kullanici=rep_kul.Find(x=>x.KullaniciAdi==model.KullaniciAdi || x.Email==model.Email);   
+            
+            if(kullanici!=null && kullanici.Id!=model.Id)
+            {
+                if(kullanici.Email==model.Email)
+                {
+                    sonuc.hatalar.Add("Bu email adresi kayıtlı");
+                }
+
+                if(kullanici.KullaniciAdi==model.KullaniciAdi)
+                {
+                    sonuc.hatalar.Add("Bu kullanıcı adı kayıtlı");
+                }
+
+            }
+            else
+            {
+                sonuc.nesne = rep_kul.Find(x =>x.Id==model.Id);
+
+                sonuc.nesne.Adi = model.Adi;
+                sonuc.nesne.Soyad = model.Soyad;
+                sonuc.nesne.Email= model.Email; 
+                sonuc.nesne.KullaniciAdi= model.KullaniciAdi;  sonuc.nesne.Sifre = model.Sifre;
+                sonuc.nesne.ProfilResimDosyaAdi = model.ProfilResimDosyaAdi;
+
+               if(rep_kul.Update(sonuc.nesne)<1)
+                {
+                    sonuc.hatalar.Add("Profil bilgileri güncellenemedi");
+                }     
+
+            }
+            return sonuc;
+
+
         }
 
         public MakaleBLLSonuc<Kullanici> LoginKontrol(LoginModel model)
