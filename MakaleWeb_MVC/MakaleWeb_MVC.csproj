@@ -102,6 +102,7 @@
     <Content Include="Content\login.css" />
     <Content Include="Content\shop-homepage.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Validation_css.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -113,6 +114,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="resim\1.jpg" />
+    <Content Include="resim\user_1.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.6.4.intellisense.js" />
@@ -146,7 +148,8 @@
     <Content Include="Views\Home\KayitBasarili.cshtml" />
     <Content Include="Views\Home\HesapAktiflestir.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
-    <Content Include="Views\Home\Profil.cshtml" />
+    <Content Include="Views\Home\ProfilGoster.cshtml" />
+    <Content Include="Views\Home\ProfilDegistir.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

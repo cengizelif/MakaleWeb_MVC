@@ -82,7 +82,7 @@ namespace MakaleBLL
 
                 if(islemsonuc>0)
                 {
-                    sonuc.nesne= rep_kul.Find(x => x.KullaniciAdi == model.KullaniciAdi || x.Email == model.Email);
+                    sonuc.nesne= rep_kul.Find(x => x.KullaniciAdi == model.KullaniciAdi && x.Email == model.Email);
 
                     string siteUrl = ConfigHelper.Get<string>("SiteRootUri");
 

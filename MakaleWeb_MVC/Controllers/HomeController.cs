@@ -146,7 +146,7 @@ namespace MakaleWeb_MVC.Controllers
             return View(); 
         }  
 
-        public ActionResult Profil() 
+        public ActionResult ProfilGoster() 
         {
             Kullanici kullanici=Session["login"] as Kullanici;
 
@@ -160,6 +160,27 @@ namespace MakaleWeb_MVC.Controllers
 
             return View(sonuc.nesne);
         
+        }
+
+        public ActionResult ProfilDegistir()
+        {
+            Kullanici kullanici = Session["login"] as Kullanici;
+
+            MakaleBLLSonuc<Kullanici> sonuc = kuly.KullaniciBul(kullanici.Id);
+
+            if (sonuc.hatalar.Count > 0)
+            {
+                TempData["hatalar"] = sonuc.hatalar;
+                return RedirectToAction("Error");
+            }
+
+            return View(sonuc.nesne);
+        }
+
+        [HttpPost]
+        public ActionResult ProfilDegistir(Kullanici model,HttpPostedFileBase profilresim)
+        {
+            return View(model);
         }
 
         //public PartialViewResult kategoriPartial()
