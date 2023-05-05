@@ -12,14 +12,14 @@
         <hr />
     </div>
     <div class="row">
-        @using (Html.BeginForm("ProfilDegistir", "Home", FormMethod.Post, new {enctype="multipart/form-data"}))
+        @using (Html.BeginForm("ProfilDegistir", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="form-horizontal">
                 <div class="col-md-3">
                     @Html.HiddenFor(x => x.ProfilResimDosyaAdi)
                     <img src="~/resim/@Model.ProfilResimDosyaAdi" class="img-circle" width="130" height="130" />
                     <br />
-                    <input type="file" name="profilresim" class="form-control"/>
+                    <input type="file" name="profilresim" class="form-control" />
                     <br />
                     <span class="glyphicon glyphicon-info-sign"></span>
                     <span>Lütfen jpg,jpeg,png formatlarını kullanın</span>
@@ -27,7 +27,7 @@
                 <div class="col-md-6">
                     @Html.ValidationSummary(false)
 
-                    @Html.HiddenFor(x=>x.Id)
+                    @Html.HiddenFor(x => x.Id)
 
                     <div class="form-group ">
                         @Html.LabelFor(x => x.Adi, new { @class = "control-label col-md-2" })
@@ -78,3 +78,6 @@
 
 
 
+    @section footer{
+        @Html.Partial("_PartialPageFooter")
+    }

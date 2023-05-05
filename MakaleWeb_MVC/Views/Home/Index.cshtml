@@ -62,7 +62,6 @@
                     link = "https://picsum.photos/id/" + x + "/200/300";
                     //link = "/resim/"+item.Id.ToString()+ ".jpg";
 
-
                         <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="@link" alt="">
@@ -114,3 +113,7 @@
 
 </div>
 <!-- /.container -->
+
+@section footer{
+    @Html.Partial("_PartialPageFooter")
+    }

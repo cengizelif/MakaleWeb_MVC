@@ -1,4 +1,5 @@
 ﻿using MakaleBLL;
+using MakaleCommon;
 using MakaleEntities;
 using MakaleEntities.ViewModel;
 using System;
@@ -72,6 +73,8 @@ namespace MakaleWeb_MVC.Controllers
                 }
 
                 Session["login"] = sonuc.nesne;
+                Uygulama.login = sonuc.nesne.KullaniciAdi;
+
                 return RedirectToAction("Index");
 
             }         
@@ -86,7 +89,7 @@ namespace MakaleWeb_MVC.Controllers
 
         [HttpPost]
         public ActionResult KayitOl(RegisterModel model)
-        {         
+        {        
 
             if(ModelState.IsValid)
             {
@@ -100,10 +103,8 @@ namespace MakaleWeb_MVC.Controllers
                 }
                 else
                 {
-
                     return RedirectToAction("KayitBasarili");
-                }
-               
+                }               
           
             }
             return View(model);
@@ -173,7 +174,6 @@ namespace MakaleWeb_MVC.Controllers
                 TempData["hatalar"] = sonuc.hatalar;
                 return RedirectToAction("Error");
             }
-
             return View(sonuc.nesne);
         }
 
@@ -193,16 +193,41 @@ namespace MakaleWeb_MVC.Controllers
                     model.ProfilResimDosyaAdi = dosya;
                 }
 
-              MakaleBLLSonuc<Kullanici> sonuc=  kuly.KullaniciUpdate(model);
+                Uygulama.login = model.KullaniciAdi;
+
+                MakaleBLLSonuc<Kullanici> sonuc=  kuly.KullaniciUpdate(model);
+
                 if (sonuc.hatalar.Count > 0)
                 {
                     sonuc.hatalar.ForEach(x => ModelState.AddModelError("", x));
                     return View(model);
                 }
 
+                Session["login"] = sonuc.nesne;
+                return RedirectToAction("ProfilGoster");
             }
-            return View(model);
+           else
+            { 
+                return View(model); 
+            }          
+           
         }
+
+        public ActionResult ProfilSil()
+        {
+            Kullanici kullanici = Session["login"] as Kullanici;
+
+           MakaleBLLSonuc<Kullanici> sonuc=kuly.KullaniciSil(kullanici.Id);
+            if(sonuc.hatalar.Count>0)
+            {
+                TempData["hatalar"] = sonuc.hatalar;
+                return RedirectToAction("Error");
+            }
+
+            Session.Clear();
+            return RedirectToAction("Index");
+        }
+
 
         //public PartialViewResult kategoriPartial()
         //{

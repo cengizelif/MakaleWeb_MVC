@@ -46,11 +46,25 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    @if (kul!= null)
+                    @if (kul != null)
                     {
-                        <li>
-                            <a href="#"><span class="glyphicon glyphicon-wrench"></span> Yönetim</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-wrench"></span> Yönetim <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Makale Ekle</a></li>
+                                <li><a href="#">Makalelerim</a></li>
+                                <li><a href="#">Beğendiklerim</a></li>
+
+                                @if (kul.Admin)
+                                {
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Kategori Ekle</a></li>
+                                    <li><a href="#">Kategoriler</a></li>
+                                }
+
+                            </ul>
                         </li>
+
                     }
 
                     <li>
@@ -87,46 +101,7 @@
 
     @RenderBody()
 
-
-    <div class="container">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-4 text-center">
-                    <h5><b>Site Haritası</b></h5>
-                    <hr />
-                    <a href="/Home/EnBegenilenler"><span class="glyphicon glyphicon-heart"></span>En Beğenilenler</a>
-                    <br />
-                    <a href="/Home/SonYazilanlar"><span class="glyphicon glyphicon-list"></span> Son Yazılanlar</a>
-                </div>
-
-                <div class="col-lg-4 text-center">
-                    <h5><b>Makale Web</b></h5>
-                    <hr />
-                    <p>Tüm hakları saklıdır &copy; MakaleWeb @DateTime.Now.Year </p>
-                </div>
-
-                <div class="col-lg-4 text-center">
-                    <h5><b>E-bülten üyeliği</b></h5>
-                    <hr />
-                    <div class="col-md-12">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="E-posta adresiniz">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">Gönder</button>
-                            </span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </footer>
-
-    </div>
-
+    @RenderSection("footer",false)  
 
 </body>
 

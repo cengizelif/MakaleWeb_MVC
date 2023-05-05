@@ -59,19 +59,17 @@ namespace MakaleBLL
         {
             MakaleBLLSonuc<Kullanici> sonuc = new MakaleBLLSonuc<Kullanici>();
 
-            sonuc.nesne=rep_kul.Find(x => x.KullaniciAdi == model.KullaniciAdi || x.Email == model.Email);
+            Kullanici nesne = new Kullanici();
+            nesne.Email = model.Email;
+            nesne.KullaniciAdi=model
+                .KullaniciAdi;  
 
-            if(sonuc.nesne!=null)
+            sonuc = KullaniciKontrol(nesne);
+
+            if (sonuc.hatalar.Count > 0)
             {
-                if(sonuc.nesne.KullaniciAdi==model.KullaniciAdi)
-                {
-                    sonuc.hatalar.Add("Bu kullanıcı adı sistemle kayıtlı");
-                }
-
-                if(sonuc.nesne.Email==model.Email)
-                {
-                    sonuc.hatalar.Add("Bu email sistemde kayıtlı");
-                }
+                sonuc.nesne = nesne;
+                return sonuc;
             }
             else
             {
@@ -80,7 +78,8 @@ namespace MakaleBLL
                       KullaniciAdi=model.KullaniciAdi,  
                       Email=model.Email,    
                       Sifre=model.Sifre ,
-                      AktifGuid=Guid.NewGuid()
+                      AktifGuid=Guid.NewGuid(),
+                      ProfilResimDosyaAdi="user_1.jpg"
                 });
 
                 if(islemsonuc>0)
@@ -97,49 +96,58 @@ namespace MakaleBLL
                     MailHelper.SendMail(body, sonuc.nesne.Email, "Hesap Aktifleştirme");
 
                 }
-            }
-
-            return sonuc;   
+                return sonuc;
+            }           
         }
+
+        MakaleBLLSonuc<Kullanici> sonuc = new MakaleBLLSonuc<Kullanici>();
 
         public MakaleBLLSonuc<Kullanici> KullaniciUpdate(Kullanici model)
         {
-            MakaleBLLSonuc<Kullanici> sonuc = new MakaleBLLSonuc<Kullanici>();
+            sonuc = KullaniciKontrol(model);         
 
-          Kullanici kullanici=rep_kul.Find(x=>x.KullaniciAdi==model.KullaniciAdi || x.Email==model.Email);   
-            
-            if(kullanici!=null && kullanici.Id!=model.Id)
+            if (sonuc.hatalar.Count>0)
             {
-                if(kullanici.Email==model.Email)
-                {
-                    sonuc.hatalar.Add("Bu email adresi kayıtlı");
-                }
-
-                if(kullanici.KullaniciAdi==model.KullaniciAdi)
-                {
-                    sonuc.hatalar.Add("Bu kullanıcı adı kayıtlı");
-                }
-
+                sonuc.nesne = model;
+                return sonuc;
             }
             else
             {
-                sonuc.nesne = rep_kul.Find(x =>x.Id==model.Id);
+                sonuc.nesne = rep_kul.Find(x => x.Id == model.Id);
 
                 sonuc.nesne.Adi = model.Adi;
                 sonuc.nesne.Soyad = model.Soyad;
-                sonuc.nesne.Email= model.Email; 
-                sonuc.nesne.KullaniciAdi= model.KullaniciAdi;  sonuc.nesne.Sifre = model.Sifre;
+                sonuc.nesne.Email = model.Email;
+                sonuc.nesne.KullaniciAdi = model.KullaniciAdi; sonuc.nesne.Sifre = model.Sifre;
                 sonuc.nesne.ProfilResimDosyaAdi = model.ProfilResimDosyaAdi;
 
-               if(rep_kul.Update(sonuc.nesne)<1)
+                if (rep_kul.Update(sonuc.nesne) < 1)
                 {
                     sonuc.hatalar.Add("Profil bilgileri güncellenemedi");
-                }     
+                }
+             return sonuc;
+            }     
 
+        }
+
+
+        public MakaleBLLSonuc<Kullanici> KullaniciKontrol(Kullanici kullanici)
+        {
+            Kullanici k1 = rep_kul.Find(x => x.Email == kullanici.Email);
+
+            Kullanici k2 = rep_kul.Find(x => x.KullaniciAdi == kullanici.KullaniciAdi);
+
+            if(k1!=null && k1.Id!=kullanici.Id)
+            {
+                sonuc.hatalar.Add("Bu email adresi kayıtlı");
             }
+
+            if(k2!=null && k2.Id!=kullanici.Id) 
+            {
+                sonuc.hatalar.Add("Bu kullanıcı adı kayıtlı");
+            }
+
             return sonuc;
-
-
         }
 
         public MakaleBLLSonuc<Kullanici> LoginKontrol(LoginModel model)
@@ -163,7 +171,22 @@ namespace MakaleBLL
             return sonuc;
         }
 
+        public MakaleBLLSonuc<Kullanici> KullaniciSil(int id)
+        {
+            Kullanici kullanici = rep_kul.Find(x => x.Id == id);
+            if(kullanici!=null)
+            {
+               if(rep_kul.Delete(kullanici)<1)
+                {
+                    sonuc.hatalar.Add("Kullanıcı silinemedi");
+                }
+            }
+            else
+            {
+                sonuc.hatalar.Add("Kullanıcı bulunamadı");
+            }
 
-
+            return sonuc;
+        }
     }
 }

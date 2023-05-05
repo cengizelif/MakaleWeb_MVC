@@ -1,4 +1,5 @@
-﻿using MakaleEntities;
+﻿using MakaleCommon;
+using MakaleEntities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -36,7 +37,7 @@ namespace MakaleDAL
 
                 obj.KayitTarihi = tarih;
                 obj.DegistirmeTarihi = tarih;
-                obj.DegistirenKullanici = "system";
+                obj.DegistirenKullanici = Uygulama.login;
             }
 
             return db.SaveChanges();
@@ -53,7 +54,7 @@ namespace MakaleDAL
                 BaseClass obj = nesne as BaseClass;
  
                 obj.DegistirmeTarihi = DateTime.Now;
-                obj.DegistirenKullanici = "system";
+                obj.DegistirenKullanici = Uygulama.login;
             }
             return db.SaveChanges();
         }

@@ -12,21 +12,21 @@
     <div class="row">
 
         <div class="col-md-3">
-            <img src="~/resim/@Model.ProfilResimDosyaAdi" class="img-circle" width="130" height="130"   />
+            <img src="~/resim/@Model.ProfilResimDosyaAdi" class="img-circle" width="130" height="130" />
         </div>
         <div class="col-md-5">
             <h3>@(Model.Adi+" "+Model.Soyad)</h3>
             <br />
-            <h4><b>Email:</b>@Model.Email</h4>         
+            <h4><b>Email:</b>@Model.Email</h4>
             <h4><b>Kullanıcı Adı:</b>@Model.KullaniciAdi</h4>
             <br />
         </div>
         <div class="col-md-4">
 
-            <div class="btn-group">             
+            <div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="caret"></span>
-                    Seçenekler              
+                    Seçenekler
                 </button>
                 <ul class="dropdown-menu">
                     <li><a href="/Home/ProfilDegistir"><span class="glyphicon glyphicon-edit">&nbsp;</span>Değiştir</a></li>
@@ -39,3 +39,7 @@
 
 </div>
 
+
+@section footer{
+    @Html.Partial("_PartialPageFooter")
+}

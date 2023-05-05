@@ -150,6 +150,7 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Home\ProfilGoster.cshtml" />
     <Content Include="Views\Home\ProfilDegistir.cshtml" />
+    <Content Include="Views\Shared\_PartialPageFooter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
