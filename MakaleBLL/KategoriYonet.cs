@@ -21,5 +21,18 @@ namespace MakaleBLL
             return rep_kat.Find(x=>x.Id == id); 
         }
 
+        public void KategoriEkle(Kategori model)
+        {
+
+        }
+        public void KategoriUpdate(Kategori model)
+        {
+
+        }
+        public void KategoriSil(int id)
+        {
+
+        }
+
     }
 }
