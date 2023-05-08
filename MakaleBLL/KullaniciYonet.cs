@@ -100,6 +100,11 @@ namespace MakaleBLL
             }           
         }
 
+        public void KullaniciKaydet(Kullanici kullanici)
+        {
+            //Yazılacak...
+        }
+
         MakaleBLLSonuc<Kullanici> sonuc = new MakaleBLLSonuc<Kullanici>();
 
         public MakaleBLLSonuc<Kullanici> KullaniciUpdate(Kullanici model)
@@ -188,5 +193,11 @@ namespace MakaleBLL
 
             return sonuc;
         }
+
+        public List<Kullanici> KullaniciListesi()
+        {
+            return rep_kul.Liste();
+        }
+
     }
 }

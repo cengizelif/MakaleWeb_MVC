@@ -55,9 +55,14 @@
                         @Html.DisplayFor(modelItem => item.DegistirenKullanici)
                     </td>
                     <td>
-                        @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
-                        @Html.ActionLink("Detay", "Details", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })
-                        @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                        @MyHelper.LinkButton("/Kategori/Edit/" + item.Id, "link", "success", "btn-xs", "edit", "Düzenle")
+
+                        @MyHelper.LinkButton("/Kategori/Details/" + item.Id, "link", "warning", "btn-xs", "search", "Detay")
+                       
+                        @MyHelper.LinkButton("/Kategori/Delete/" + item.Id, "link", "danger", "btn-xs", "trash", "Sil")
+                        @*@Html.ActionLink("Düzenle", "Edit", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })*@
+                        @*@Html.ActionLink("Detay", "Details", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })
+        @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })*@
                     </td>
                 </tr>
             }
