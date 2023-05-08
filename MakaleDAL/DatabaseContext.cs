@@ -20,5 +20,18 @@ namespace MakaleDAL
         {
             Database.SetInitializer(new VeriTabaniOlusturucu());
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Kategori>().HasMany(k => k.Makaleler).WithRequired(x => x.Kategori).WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Makale>().HasMany(m => m.Yorumlar).WithRequired(x => x.Makale).WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Makale>().HasMany(m => m.Begeniler).WithRequired(x => x.Makale).WillCascadeOnDelete(true);
+
+        }
+
+
+
     }
 }

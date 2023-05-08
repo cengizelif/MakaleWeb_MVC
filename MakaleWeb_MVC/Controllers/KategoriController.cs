@@ -45,7 +45,12 @@ namespace MakaleWeb_MVC.Controllers
             ModelState.Remove("DegistirenKullanici");
             if (ModelState.IsValid)
             {
-                ky.KategoriEkle(kategori);
+               MakaleBLLSonuc<Kategori> sonuc= ky.KategoriEkle(kategori);
+                if(sonuc.hatalar.Count>0)
+                {
+                    sonuc.hatalar.ForEach(x => ModelState.AddModelError("", x));
+                    return View(kategori);
+                }
                 return RedirectToAction("Index");
             }
             return View(kategori);
@@ -73,7 +78,12 @@ namespace MakaleWeb_MVC.Controllers
             ModelState.Remove("DegistirenKullanici");
             if (ModelState.IsValid)
             {
-                ky.KategoriUpdate(kategori);
+               MakaleBLLSonuc<Kategori> sonuc= ky.KategoriUpdate(kategori);
+                if (sonuc.hatalar.Count > 0)
+                {
+                    sonuc.hatalar.ForEach(x => ModelState.AddModelError("", x));
+                    return View(kategori);
+                }
                 return RedirectToAction("Index");
             }
             return View(kategori);
