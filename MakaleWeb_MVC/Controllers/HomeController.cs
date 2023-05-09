@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MakaleWeb_MVC.Models;
 
 namespace MakaleWeb_MVC.Controllers
 {
@@ -72,7 +73,7 @@ namespace MakaleWeb_MVC.Controllers
                     return View(model);  
                 }
 
-                Session["login"] = sonuc.nesne;
+               SessionUser.Login = sonuc.nesne;
                 Uygulama.login = sonuc.nesne.KullaniciAdi;
 
                 return RedirectToAction("Index");
@@ -149,9 +150,7 @@ namespace MakaleWeb_MVC.Controllers
 
         public ActionResult ProfilGoster() 
         {
-            Kullanici kullanici=Session["login"] as Kullanici;
-
-            MakaleBLLSonuc<Kullanici> sonuc = kuly.KullaniciBul(kullanici.Id);
+            MakaleBLLSonuc<Kullanici> sonuc = kuly.KullaniciBul(SessionUser.Login.Id);
 
             if(sonuc.hatalar.Count>0)
             {
@@ -165,9 +164,8 @@ namespace MakaleWeb_MVC.Controllers
 
         public ActionResult ProfilDegistir()
         {
-            Kullanici kullanici = Session["login"] as Kullanici;
 
-            MakaleBLLSonuc<Kullanici> sonuc = kuly.KullaniciBul(kullanici.Id);
+            MakaleBLLSonuc<Kullanici> sonuc = kuly.KullaniciBul(SessionUser.Login.Id);
 
             if (sonuc.hatalar.Count > 0)
             {
@@ -203,7 +201,7 @@ namespace MakaleWeb_MVC.Controllers
                     return View(model);
                 }
 
-                Session["login"] = sonuc.nesne;
+                SessionUser.Login = sonuc.nesne;
                 return RedirectToAction("ProfilGoster");
             }
            else
@@ -215,9 +213,8 @@ namespace MakaleWeb_MVC.Controllers
 
         public ActionResult ProfilSil()
         {
-            Kullanici kullanici = Session["login"] as Kullanici;
+           MakaleBLLSonuc<Kullanici> sonuc=kuly.KullaniciSil(SessionUser.Login.Id);
 
-           MakaleBLLSonuc<Kullanici> sonuc=kuly.KullaniciSil(kullanici.Id);
             if(sonuc.hatalar.Count>0)
             {
                 TempData["hatalar"] = sonuc.hatalar;
