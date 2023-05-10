@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MakaleWeb_MVC.Models;
+using System.Data.Entity;
 
 namespace MakaleWeb_MVC.Controllers
 {
@@ -16,6 +17,7 @@ namespace MakaleWeb_MVC.Controllers
         MakaleYonet my = new MakaleYonet();
         KategoriYonet ky = new KategoriYonet();
         KullaniciYonet kuly = new KullaniciYonet();
+        BegeniYonet by = new BegeniYonet();
         public ActionResult Index()
         {
             // Test test = new Test();
@@ -27,6 +29,12 @@ namespace MakaleWeb_MVC.Controllers
             return View(my.Listele());
         }
 
+        public ActionResult Begendiklerim()
+        {
+            var query = by.ListQueryable().Include("Kullanici").Include("Makale").Where(x => x.Kullanici.Id == SessionUser.Login.Id).Select(x => x.Makale).Include("Kategori").Include("Kullanici").OrderByDescending(x => x.DegistirmeTarihi);
+
+            return View("Index", query.ToList());
+        }
         public ActionResult Kategori(int? id)
         {
             if(id==null)

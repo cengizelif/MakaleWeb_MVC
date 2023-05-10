@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MakaleBLL;
 using MakaleEntities;
+using MakaleWeb_MVC.Models;
 
 namespace MakaleWeb_MVC.Controllers
 {
@@ -51,6 +52,7 @@ namespace MakaleWeb_MVC.Controllers
                     sonuc.hatalar.ForEach(x => ModelState.AddModelError("", x));
                     return View(kategori);
                 }
+                CacheHelper.CacheTemizle();
                 return RedirectToAction("Index");
             }
             return View(kategori);
@@ -84,6 +86,7 @@ namespace MakaleWeb_MVC.Controllers
                     sonuc.hatalar.ForEach(x => ModelState.AddModelError("", x));
                     return View(kategori);
                 }
+                CacheHelper.CacheTemizle();
                 return RedirectToAction("Index");
             }
             return View(kategori);
@@ -109,6 +112,7 @@ namespace MakaleWeb_MVC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ky.KategoriSil(id);
+            CacheHelper.CacheTemizle();
             return RedirectToAction("Index");
         }
 

@@ -16,6 +16,7 @@ namespace MakaleDAL
         int Delete(T nesne);
         List<T>  Liste();
         List<T> Liste(Expression<Func<T,bool>> kosul);
+        IQueryable<T> ListQueryable();
         T Find(Expression<Func<T, bool>> kosul);
     }
 }

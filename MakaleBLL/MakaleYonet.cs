@@ -17,6 +17,11 @@ namespace MakaleBLL
           return rep_makale.Liste();
         }
 
+        public IQueryable<Makale> ListQueryable()
+        {
+            return rep_makale.ListQueryable();
+        }
+
         public Makale MakaleBul(int id)
         {
             return rep_makale.Find(x=>x.Id== id);

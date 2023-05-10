@@ -22,6 +22,11 @@ namespace MakaleDAL
         {
            return dbset.ToList();
         }
+
+        public IQueryable<T> ListQueryable()
+        {
+            return dbset.AsQueryable();
+        }
         public List<T> Liste(Expression<Func<T, bool>> kosul)
         {
             return dbset.Where(kosul).ToList();

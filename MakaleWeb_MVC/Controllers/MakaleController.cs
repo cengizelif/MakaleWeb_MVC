@@ -38,7 +38,7 @@ namespace MakaleWeb_MVC.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Kategori= new SelectList(ky.Listele(), "Id", "Baslik");
+            ViewBag.Kategori= new SelectList(CacheHelper.KategoriCache(), "Id", "Baslik");
             return View();
         }
 
@@ -50,7 +50,7 @@ namespace MakaleWeb_MVC.Controllers
             ModelState.Remove("Kategori.Baslik");
             ModelState.Remove("Kategori.DegistirenKullanici");
 
-            ViewBag.Kategori = new SelectList(ky.Listele(), "Id", "Baslik", makale.Kategori.Id);
+            ViewBag.Kategori = new SelectList(CacheHelper.KategoriCache(), "Id", "Baslik", makale.Kategori.Id);
 
             if (ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace MakaleWeb_MVC.Controllers
         {
             Makale makale = my.MakaleBul(id.Value);
           
-            ViewBag.Kategori = new SelectList(ky.Listele(), "Id", "Baslik",makale.Kategori.Id);
+            ViewBag.Kategori = new SelectList(CacheHelper.KategoriCache(), "Id", "Baslik",makale.Kategori.Id);
 
             if (id == null)
             {
@@ -93,7 +93,7 @@ namespace MakaleWeb_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Makale makale)
         {
-            ViewBag.Kategori = new SelectList(ky.Listele(), "Id", "Baslik",makale.Kategori.Id);
+            ViewBag.Kategori = new SelectList(CacheHelper.KategoriCache(), "Id", "Baslik",makale.Kategori.Id);
 
             ModelState.Remove("DegistirenKullanici");
             ModelState.Remove("Kategori.Baslik");

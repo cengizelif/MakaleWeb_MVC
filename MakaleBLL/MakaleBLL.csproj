@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BegeniYonet.cs" />
     <Compile Include="KategoriYonet.cs" />
     <Compile Include="KullaniciYonet.cs" />
     <Compile Include="MakaleBLLSonuc.cs" />
