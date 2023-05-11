@@ -18,7 +18,7 @@ namespace MakaleBLL
 
         public int yorumEkle(Yorum yorum)
         {
-            throw new NotImplementedException();
+            return rep_yorum.Insert(yorum); 
         }
 
         public int yorumSil(Yorum yorum)

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using MakaleBLL;
 using MakaleEntities;
+using MakaleWeb_MVC.Models;
 
 namespace MakaleWeb_MVC.Controllers
 {
@@ -86,15 +87,20 @@ namespace MakaleWeb_MVC.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            YorumYonet yy = new YorumYonet();
-            Yorum yorum = yy.YorumBul(id.Value);
+            MakaleYonet my = new MakaleYonet();
+            Makale makale = my.MakaleBul(id.Value);
 
-            if (yorum == null)
+            if (makale == null)
             {
                 return HttpNotFound();
             }
 
-            if (yy.yorumEkle(yorum) > 0)
+            nesne.Makale = makale;
+            nesne.Kullanici = SessionUser.Login;
+
+            YorumYonet yy =new YorumYonet();
+
+            if (yy.yorumEkle(nesne) > 0)
             {
                 return Json(new { hata = false }, JsonRequestBehavior.AllowGet);
             }
