@@ -16,16 +16,17 @@
     </div>
     <div class="media-body">
         <div>
-            <span class="col-md-10">
+            <span class="col-md-10" contenteditable="false" id="yorum_@item.Id">
                 @item.Text
             </span>
             @if (kullanici != null && kullanici.Id == item.Kullanici.Id)
             {
                 <span class="col-md-2 text-right">
-                    <button type="button" class="btn btn-warning btn-xs">
+                    <button type="button" class="btn btn-warning btn-xs" 
+                            data-editmod="false"  onclick="islemyap(this, 'update',@item.Id, '#yorum_@item.Id');">
                         <span class="glyphicon glyphicon-edit"></span>
                     </button>
-                    <button type="button" class="btn btn-danger btn-xs">
+                    <button type="button" class="btn btn-danger btn-xs" onclick="islemyap(this, 'delete',@item.Id);">
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </span>
@@ -40,3 +41,23 @@
 </div>
 }
 
+@if(kullanici!=null)
+            {
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr />
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="input-group">
+            <input type="text" id="yorum_text" class="form-control" placeholder="yorumunuz...">
+            <span class="input-group-btn">
+                <button class="btn btn-success" type="button" onclick="islemyap(this,'insert');">Gönder</button>
+            </span>
+        </div>
+    </div>
+</div>
+            }
