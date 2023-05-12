@@ -62,7 +62,8 @@
                     link = "https://picsum.photos/id/" + x + "/200/300";
                     //link = "/resim/"+item.Id.ToString()+ ".jpg";
 
-                    <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="col-sm-4 col-lg-4 col-md-4"
+                         data-makaleid="@item.Id">
                         <div class="thumbnail">
                             <img src="@link" alt="">
 
@@ -95,7 +96,10 @@
                                     <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal1" data-makaleid="@item.Id"><span class="glyphicon glyphicon-comment"></span>Yorumlar</button>
                                 </p>
                                 <p>
-                                    <button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-heart"></span>@item.BegeniSayisi</button>
+                                    <button class="btn btn-default btn-sm" data-mid="@item.Id" data-like="false">
+                                        <span class="glyphicon glyphicon-heart-empty like-kalp"></span>
+                                        <span class="like-count"> @item.BegeniSayisi</span>
+                                    </button>
                                 </p>
                             </div>
                         </div>
@@ -121,3 +125,4 @@
     @Html.Partial("_PartialPageFooter")
 }
 <script src="~/Scripts/CommentScript.js"></script>
+<script src="~/Scripts/LikeScript.js"></script>

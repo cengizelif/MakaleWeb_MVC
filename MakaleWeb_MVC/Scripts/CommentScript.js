@@ -86,7 +86,7 @@ function islemyap(btn, islem, yorumid, spanid)
     else if (islem == "insert")
     {
         var yorum = $("#yorum_text").val();
-
+        console.log(mid);
         $.ajax({
             method: "POST",
             url: "/Yorum/YorumEkle",

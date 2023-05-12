@@ -138,5 +138,26 @@ namespace MakaleWeb_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult MakaleGetir(int[] mid)
+        {
+            //mid=1,5,9,12,15,35
+            //select * from begeni where kullanici_id=5 and makale_id in(1,5,9,12,15,35)
+            //liste=9,12,35
+
+            BegeniYonet by = new BegeniYonet();
+            List<int> mliste = null;
+
+            if(SessionUser.Login!=null)
+            {
+    mliste= by.Liste().Where(x=>x.Kullanici.Id==SessionUser.Login.Id && mid.Contains(x.Makale.Id)).Select(x=>x.Makale.Id).ToList(); 
+            }
+         
+
+            return Json(new {liste=mliste});
+
+        }
+
+
     }
 }
