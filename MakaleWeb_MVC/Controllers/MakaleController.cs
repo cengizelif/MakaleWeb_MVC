@@ -138,6 +138,8 @@ namespace MakaleWeb_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        BegeniYonet by = new BegeniYonet();
+
         [HttpPost]
         public ActionResult MakaleGetir(int[] mid)
         {
@@ -145,19 +147,60 @@ namespace MakaleWeb_MVC.Controllers
             //select * from begeni where kullanici_id=5 and makale_id in(1,5,9,12,15,35)
             //liste=9,12,35
 
-            BegeniYonet by = new BegeniYonet();
+
             List<int> mliste = null;
 
             if(SessionUser.Login!=null)
             {
     mliste= by.Liste().Where(x=>x.Kullanici.Id==SessionUser.Login.Id && mid.Contains(x.Makale.Id)).Select(x=>x.Makale.Id).ToList(); 
-            }
-         
+            }        
 
             return Json(new {liste=mliste});
 
         }
 
+        [HttpPost]  
+        public ActionResult MakaleBegen(int makaleid,bool begeni)
+        {
+            Begeni like=by.BegeniBul(makaleid, SessionUser.Login.Id);
+            Makale makale = my.MakaleBul(makaleid);
+            int sonuc = 0;
+
+            if(like!=null && begeni==false)
+            {
+               sonuc=by.BegeniSil(like);
+            }
+            else if(like==null && begeni==true)
+            {
+               sonuc=by.BegeniEkle(new Begeni() 
+                { 
+                    Kullanici = SessionUser.Login,
+                    Makale=makale
+                });
+            }
+
+            if(sonuc>0)
+            {
+                if(begeni)
+                {
+                    makale.BegeniSayisi++;
+                }
+                else
+                {
+                    makale.BegeniSayisi--;
+                }
+
+                my.MakaleUpdate(makale);
+
+                return Json(new { hata=false,begenisayisi=makale.BegeniSayisi} ); 
+            }
+            else
+            {
+                return Json(new { hata = true,begenisayisi = makale.BegeniSayisi });
+            }
+
+
+        }
 
     }
 }

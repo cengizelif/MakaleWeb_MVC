@@ -31,5 +31,47 @@ $(function () {
         alert("Sunucu ile bağlantı kurulamadı");
     });
 
+    $("button[data-like]").click(function () {
+
+        var btn = $(this);
+        var like = btn.data("like");
+        var mid = btn.data("mid");
+
+        $.ajax({
+            method: "POST",
+            url: "/Makale/MakaleBegen",
+            data: { makaleid: mid, begeni: !like }
+        }).done(function (sonuc) {
+            if (sonuc.hata) {
+                alert("Beğeni işlemi gerçekleştirilemedi");
+            }
+            else
+            {
+                var begeni = !like;
+                btn.data("like", !like);
+                var spanlike = $("span.like-kalp");
+                var likecount = $("span.like-count");
+
+                likecount.text(sonuc.begenisayisi);
+
+                spanlike.removeClass("glyphicon-heart-empty");
+                spanlike.removeClass("glyphicon-heart");
+                if (begeni)
+                {
+                    spanlike.addClass("glyphicon-heart");
+                }
+                else
+                {
+                    spanlike.addClass("glyphicon-heart-empty");
+                }
+
+            }
+        }).fail(function () {
+            alert("Sunucu ile bağlantı kurulamadı");
+        });
+
+
+    });
+
 
 });
