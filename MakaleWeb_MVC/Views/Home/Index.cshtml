@@ -70,7 +70,7 @@
                             <div class="caption">
 
                                 <h4>
-                                    <a href="#">@item.Baslik</a>
+                                    <a href="#" data-toggle="modal" data-target="#modal_makale" data-makaleid="@item.Id">@item.Baslik</a>
                                 </h4>
                                 <h6 class="text-right">
                                     <span class="glyphicon glyphicon-user"></span>@item.Kullanici.KullaniciAdi
@@ -80,7 +80,7 @@
 
                                 @if (!string.IsNullOrEmpty(item.Icerik) && item.Icerik.Length > 70)
                                 {
-                                    <p>@item.Icerik.Substring(0, 70)</p><p class="pull-right"> <a href="#" class="btn btn-default btn-xs">devamı<span class="glyphicon glyphicon-chevron-right"></span></a></p>
+                                    <p>@item.Icerik.Substring(0, 70)</p><p class="pull-right"> <a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal_makale" data-makaleid="@item.Id">devamı<span class="glyphicon glyphicon-chevron-right"></span></a></p>
                                 }
                                 else
                                 {
@@ -97,8 +97,8 @@
                                 </p>
                                 <p>
                                     <button class="btn btn-default btn-sm" data-mid="@item.Id" data-like="false">
-                                        <span class="glyphicon glyphicon-heart-empty like-kalp"></span>
-                                        <span class="like-count"> @item.BegeniSayisi</span>
+                            <span class="glyphicon glyphicon-heart-empty like-kalp-@item.Id"></span>
+                  <span class="like-@item.Id"> @item.BegeniSayisi</span>
                                     </button>
                                 </p>
                             </div>
@@ -118,7 +118,7 @@
 <!-- /.container -->
 
 @MyHelper.ModalPopup("modal1", "Yorumlar")
-
+@MyHelper.ModalPopup("modal_makale","Makale Detay")
 
 
 @section footer{
@@ -126,3 +126,18 @@
 }
 <script src="~/Scripts/CommentScript.js"></script>
 <script src="~/Scripts/LikeScript.js"></script>
+
+<script>
+
+    $(function () {
+
+        $('#modal_makale').on('show.bs.modal', function (e) {
+
+            var btn = $(e.relatedTarget);
+            var mid = btn.data("makaleid");
+
+            $("#modal_makale_body").load("/Makale/MakaleGoster/" + mid);
+
+        });
+    });
+</script>

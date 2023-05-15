@@ -26,7 +26,7 @@ namespace MakaleWeb_MVC.Controllers
             // test.DeleteTest();
             // test.YorumTest();         
           
-            return View(my.Listele());
+            return View(my.Listele().Where(x=>x.Taslak==false).OrderByDescending(x=>x.DegistirmeTarihi).ToList());
         }
 
         public ActionResult Begendiklerim()
@@ -44,17 +44,17 @@ namespace MakaleWeb_MVC.Controllers
 
             Kategori kat = ky.KategoriBul(id.Value);
             
-            return View("Index",kat.Makaleler);
+            return View("Index",kat.Makaleler.Where(x=>x.Taslak==false).OrderByDescending(x=>x.DegistirmeTarihi).ToList());
         }
 
         public ActionResult EnBegenilenler()
         {
-            return View("Index",my.Listele().OrderByDescending(x=>x.BegeniSayisi).ToList());
+            return View("Index",my.Listele().Where(x=>x.Taslak==false).OrderByDescending(x=>x.BegeniSayisi).ToList());
         }
 
         public ActionResult SonYazilanlar()
         {
-            return View("Index", my.Listele().OrderByDescending(x => x.DegistirmeTarihi).ToList());
+            return View("Index", my.Listele().Where(x=>x.Taslak==false).OrderByDescending(x => x.DegistirmeTarihi).ToList());
         }
 
         public ActionResult Hakkımızda()

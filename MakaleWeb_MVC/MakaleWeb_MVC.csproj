@@ -185,6 +185,7 @@
     <Content Include="Views\Makale\Edit.cshtml" />
     <Content Include="Views\Makale\Index.cshtml" />
     <Content Include="Views\Shared\_PartialPageYorumlar.cshtml" />
+    <Content Include="Views\Shared\_PartialPageMakaleGoster.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

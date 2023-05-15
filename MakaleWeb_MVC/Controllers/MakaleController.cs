@@ -147,12 +147,12 @@ namespace MakaleWeb_MVC.Controllers
             //select * from begeni where kullanici_id=5 and makale_id in(1,5,9,12,15,35)
             //liste=9,12,35
 
-
             List<int> mliste = null;
 
-            if(SessionUser.Login!=null)
+            if(SessionUser.Login!=null && mid !=null)
             {
     mliste= by.Liste().Where(x=>x.Kullanici.Id==SessionUser.Login.Id && mid.Contains(x.Makale.Id)).Select(x=>x.Makale.Id).ToList(); 
+           
             }        
 
             return Json(new {liste=mliste});
@@ -164,6 +164,7 @@ namespace MakaleWeb_MVC.Controllers
         {
             Begeni like=by.BegeniBul(makaleid, SessionUser.Login.Id);
             Makale makale = my.MakaleBul(makaleid);
+
             int sonuc = 0;
 
             if(like!=null && begeni==false)
@@ -202,5 +203,19 @@ namespace MakaleWeb_MVC.Controllers
 
         }
 
-    }
+    
+         public ActionResult MakaleGoster(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Makale makale = my.MakaleBul(id.Value);
+            if (makale == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("_PartialPageMakaleGoster", makale);
+        }
+    }  
 }

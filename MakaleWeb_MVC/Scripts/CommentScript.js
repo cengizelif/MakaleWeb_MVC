@@ -17,7 +17,6 @@ function islemyap(btn, islem, yorumid, spanid)
     {
         var button = $(btn);
         var durum = button.data("editmod");
-
     if (islem == "update") {
         if (durum == false) {
             button.data("editmod", true);
@@ -57,10 +56,7 @@ function islemyap(btn, islem, yorumid, spanid)
             }).fail(function () {
                 alert("Sunucu ile bağlantı kurulamadı");
             });
-
         }
-
-
     }
     else if (islem == "delete") {
 
@@ -68,7 +64,6 @@ function islemyap(btn, islem, yorumid, spanid)
         if (!onay) {
             return false;
         }
-
         $.ajax({
             method: "GET",
             url: "/Yorum/YorumSil/" + yorumid
@@ -81,7 +76,6 @@ function islemyap(btn, islem, yorumid, spanid)
                 $("#modal1_body").load("/Yorum/YorumGoster/" + mid);
             }
         }).fail(function () { alert("Sunucu ile bağlantı kurulamadı.") });
-
     }
     else if (islem == "insert")
     {
@@ -102,11 +96,8 @@ function islemyap(btn, islem, yorumid, spanid)
         }).fail(function () {
             alert("Sunucu ile bağlantı kurulamadı.") 
         });
-
     }
-
-
-    }
+}
 
 
 

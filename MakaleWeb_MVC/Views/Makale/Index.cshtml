@@ -70,19 +70,23 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.DegistirenKullanici)
                     </td>
-                    <td>
+                    <td width="150">
                         @MyHelper.LinkButton("/Makale/Edit/" + item.Id, "link", "success", "btn-xs", "edit", "")
 
                         @MyHelper.LinkButton("/Makale/Details/" + item.Id, "link", "warning", "btn-xs", "search", "")
 
                         @MyHelper.LinkButton("/Makale/Delete/" + item.Id, "link", "danger", "btn-xs", "trash", "")
 
-
+                        <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal1" data-makaleid="@item.Id"><span class="glyphicon glyphicon-comment"></span></button>
 
                     </td>
                 </tr>
             }
 
         </table>
+    </div>
 </div>
-</div>
+
+
+@MyHelper.ModalPopup("modal1", "Yorumlar")
+<script src="~/Scripts/CommentScript.js"></script>

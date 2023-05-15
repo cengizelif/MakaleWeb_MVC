@@ -34,6 +34,8 @@ namespace MakaleEntities
 
         [Required,ScaffoldColumn(false)]
         public Guid AktifGuid { get; set; }
+
+        [DisplayName("Yönetici")]
         public bool Admin { get; set; }
         public virtual List<Makale> Makaleler { get; set; } 
         public virtual List<Yorum> Yorumlar { get; set; }
