@@ -14,6 +14,7 @@ namespace MakaleWeb_MVC.Controllers
 {
     [Auth]
     [AuthAdmin]
+    [Exc]
     public class KullaniciController : Controller
     {
      KullaniciYonet ky=new KullaniciYonet();

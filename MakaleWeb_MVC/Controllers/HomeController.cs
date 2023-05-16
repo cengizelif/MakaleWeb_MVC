@@ -11,8 +11,10 @@ using MakaleWeb_MVC.Models;
 using System.Data.Entity;
 using MakaleWeb_MVC.filter;
 
+
 namespace MakaleWeb_MVC.Controllers
 {
+    [Exc]
     public class HomeController : Controller
     {
         MakaleYonet my = new MakaleYonet();
@@ -26,8 +28,9 @@ namespace MakaleWeb_MVC.Controllers
             // test.UpdateTest();
             // test.DeleteTest();
             // test.YorumTest();         
-          
-            return View(my.Listele().Where(x=>x.Taslak==false).OrderByDescending(x=>x.DegistirmeTarihi).ToList());
+            //int i = 0;
+            //int s = 1 / i;
+            return View(my.Listele().Where(x=>x.Taslak==false).OrderByDescending(x=>x.DegistirmeTarihi).Take(9).ToList());
         }
 
         [Auth]
@@ -245,6 +248,10 @@ namespace MakaleWeb_MVC.Controllers
             return View();
         }
 
+        public ActionResult HataliIslem()
+        {
+            return View();
+        }
 
         //public PartialViewResult kategoriPartial()
         //{

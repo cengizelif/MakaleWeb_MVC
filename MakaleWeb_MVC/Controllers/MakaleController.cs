@@ -15,6 +15,7 @@ using MakaleWeb_MVC.Models;
 namespace MakaleWeb_MVC.Controllers
 {
 
+    [Exc]
     public class MakaleController : Controller
     {
         MakaleYonet my=new MakaleYonet();

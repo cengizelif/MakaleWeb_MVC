@@ -11,6 +11,7 @@ using MakaleWeb_MVC.Models;
 
 namespace MakaleWeb_MVC.Controllers
 {
+    [Exc]
     public class YorumController : Controller
     {
         // GET: Yorum

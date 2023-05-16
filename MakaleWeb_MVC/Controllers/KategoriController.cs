@@ -15,6 +15,7 @@ namespace MakaleWeb_MVC.Controllers
 {
     [Auth]
     [AuthAdmin]
+    [Exc]
     public class KategoriController : Controller
     {
         KategoriYonet ky = new KategoriYonet();
