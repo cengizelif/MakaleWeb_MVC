@@ -8,20 +8,31 @@ using System.Web;
 using System.Web.Mvc;
 using MakaleBLL;
 using MakaleEntities;
+using MakaleWeb_MVC.filter;
 using MakaleWeb_MVC.Models;
 
 
 namespace MakaleWeb_MVC.Controllers
 {
+
     public class MakaleController : Controller
     {
         MakaleYonet my=new MakaleYonet();
         KategoriYonet ky = new KategoriYonet();
+
+        [Auth]
         public ActionResult Index()
         {
-            return View(my.Listele().Where(x=>x.Kullanici.Id==SessionUser.Login.Id));
+            if(SessionUser.Login!=null)
+            { 
+                return View(my.Listele().Where(x=>x.Kullanici.Id==SessionUser.Login.Id));
+
+            }
+            return View(my.Listele());
+
         }
 
+        [Auth]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,12 +47,14 @@ namespace MakaleWeb_MVC.Controllers
             return View(makale);
         }
 
+        [Auth]
         public ActionResult Create()
         {
             ViewBag.Kategori= new SelectList(CacheHelper.KategoriCache(), "Id", "Baslik");
             return View();
         }
 
+        [Auth]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Makale makale)
@@ -69,7 +82,7 @@ namespace MakaleWeb_MVC.Controllers
             return View(makale);
         }
 
-        // GET: Makale/Edit/5
+        [Auth]
         public ActionResult Edit(int? id)
         {
             Makale makale = my.MakaleBul(id.Value);
@@ -89,6 +102,7 @@ namespace MakaleWeb_MVC.Controllers
             return View(makale);
         }
 
+        [Auth]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Makale makale)
@@ -116,6 +130,7 @@ namespace MakaleWeb_MVC.Controllers
             return View(makale);
         }
 
+        [Auth]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -130,6 +145,7 @@ namespace MakaleWeb_MVC.Controllers
             return View(makale);
         }
 
+        [Auth]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -140,6 +156,7 @@ namespace MakaleWeb_MVC.Controllers
 
         BegeniYonet by = new BegeniYonet();
 
+        [Auth]
         [HttpPost]
         public ActionResult MakaleGetir(int[] mid)
         {
@@ -159,6 +176,7 @@ namespace MakaleWeb_MVC.Controllers
 
         }
 
+        [Auth]
         [HttpPost]  
         public ActionResult MakaleBegen(int makaleid,bool begeni)
         {
@@ -203,7 +221,7 @@ namespace MakaleWeb_MVC.Controllers
 
         }
 
-    
+
          public ActionResult MakaleGoster(int? id)
         {
             if (id == null)

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using MakaleWeb_MVC.Models;
 using System.Data.Entity;
+using MakaleWeb_MVC.filter;
 
 namespace MakaleWeb_MVC.Controllers
 {
@@ -29,6 +30,7 @@ namespace MakaleWeb_MVC.Controllers
             return View(my.Listele().Where(x=>x.Taslak==false).OrderByDescending(x=>x.DegistirmeTarihi).ToList());
         }
 
+        [Auth]
         public ActionResult Begendiklerim()
         {
             var query = by.ListQueryable().Include("Kullanici").Include("Makale").Where(x => x.Kullanici.Id == SessionUser.Login.Id).Select(x => x.Makale).Include("Kategori").Include("Kullanici").OrderByDescending(x => x.DegistirmeTarihi);
@@ -154,8 +156,9 @@ namespace MakaleWeb_MVC.Controllers
             { ViewBag.hatalar = errors; }
            
             return View(); 
-        }  
+        }
 
+        [Auth]
         public ActionResult ProfilGoster() 
         {
             MakaleBLLSonuc<Kullanici> sonuc = kuly.KullaniciBul(SessionUser.Login.Id);
@@ -170,6 +173,7 @@ namespace MakaleWeb_MVC.Controllers
         
         }
 
+        [Auth]
         public ActionResult ProfilDegistir()
         {
 
@@ -183,7 +187,8 @@ namespace MakaleWeb_MVC.Controllers
             return View(sonuc.nesne);
         }
 
-        [HttpPost]
+        [Auth]
+        [HttpPost]  
         public ActionResult ProfilDegistir(Kullanici model,HttpPostedFileBase profilresim)
         {
             ModelState.Remove("DegistirenKullanici");
@@ -219,6 +224,7 @@ namespace MakaleWeb_MVC.Controllers
            
         }
 
+        [Auth]
         public ActionResult ProfilSil()
         {
            MakaleBLLSonuc<Kullanici> sonuc=kuly.KullaniciSil(SessionUser.Login.Id);
@@ -231,6 +237,12 @@ namespace MakaleWeb_MVC.Controllers
 
             Session.Clear();
             return RedirectToAction("Index");
+        }
+
+
+        public ActionResult YetkisizErisim()
+        {
+            return View();
         }
 
 

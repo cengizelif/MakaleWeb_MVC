@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using MakaleBLL;
 using MakaleEntities;
+using MakaleWeb_MVC.filter;
 using MakaleWeb_MVC.Models;
 
 namespace MakaleWeb_MVC.Controllers
@@ -32,6 +33,7 @@ namespace MakaleWeb_MVC.Controllers
             return PartialView("_PartialPageYorumlar",makale.Yorumlar);
         }
 
+        [Auth]
         public ActionResult YorumGuncelle(int? id,string text)
         {
             if (id == null)
@@ -57,6 +59,7 @@ namespace MakaleWeb_MVC.Controllers
             return Json(new { hata = true }, JsonRequestBehavior.AllowGet);
         }
 
+        [Auth]
         public ActionResult YorumSil(int? id)
         {
             if (id == null)
@@ -80,6 +83,7 @@ namespace MakaleWeb_MVC.Controllers
             return Json(new { hata = true }, JsonRequestBehavior.AllowGet);
         }
 
+        [Auth]
         public ActionResult YorumEkle(Yorum nesne,int? id)
         {
             if (id == null)

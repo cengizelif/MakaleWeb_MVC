@@ -8,10 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using MakaleBLL;
 using MakaleEntities;
+using MakaleWeb_MVC.filter;
 using MakaleWeb_MVC.Models;
 
 namespace MakaleWeb_MVC.Controllers
 {
+    [Auth]
+    [AuthAdmin]
     public class KategoriController : Controller
     {
         KategoriYonet ky = new KategoriYonet();

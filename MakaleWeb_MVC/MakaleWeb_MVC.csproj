@@ -146,6 +146,8 @@
     <Compile Include="Controllers\KullaniciController.cs" />
     <Compile Include="Controllers\MakaleController.cs" />
     <Compile Include="Controllers\YorumController.cs" />
+    <Compile Include="filter\Auth.cs" />
+    <Compile Include="filter\AuthAdmin.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,6 +188,7 @@
     <Content Include="Views\Makale\Index.cshtml" />
     <Content Include="Views\Shared\_PartialPageYorumlar.cshtml" />
     <Content Include="Views\Shared\_PartialPageMakaleGoster.cshtml" />
+    <Content Include="Views\Home\YetkisizErisim.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
